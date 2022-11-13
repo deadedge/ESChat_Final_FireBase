@@ -104,6 +104,7 @@ public class Register_User_Activity extends AppCompatActivity {
         intent.putExtra("nomeCompleto",nomeCompleto);
         intent.putExtra("nomeUtilizador",nomeUtilizador);
         startActivity(intent);
+        finish();
 
 
 

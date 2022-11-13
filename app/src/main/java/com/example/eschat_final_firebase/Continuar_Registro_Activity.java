@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -31,8 +32,10 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     String pass;
     String nomeUtilizador;
     String nomeCompleto;
-    String fotoemString="";
-    String biografia="";
+    String fotoemString;
+    String biografia;
+    String dataCompleta;
+    String fotoUriemString;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static final int CAMERA_ACTION_CODE=1;
     Bitmap finalphoto;
@@ -40,7 +43,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     int dia=0;
     int mes=0;
     int ano=0;
-    String dataCompleta;
+    private Uri mSelectedUri;
 
 
 
@@ -71,9 +74,9 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //abrir a galeria
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        Intent intent = new Intent(Intent.ACTION_PICK);
                         intent.setType("image/*");
-                        startActivityForResult(intent, 1);
+                        startActivityForResult(intent, 0);
                     }
                 });
                 builder.setNegativeButton("Camara", new DialogInterface.OnClickListener() {
@@ -113,7 +116,8 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
         user.put("senha", senha);
         user.put("nome_Completo", nomeCompleto);
         user.put("nome_Utilizador",nomeUtilizador);
-        user.put("foto_Utilizador",fotoemString);
+        user.put("foto_Bitmap_Utilizador",fotoemString);
+        user.put("foto_uri_utilizador",fotoUriemString);
         user.put("biografia",biografia);
         user.put("data_de_Nascimento",dataCompleta);
         user.put("admin",false);
@@ -125,6 +129,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getApplicationContext(),"Conta Criada com sucesso",Toast.LENGTH_SHORT).show();
                         finish();
+                        startActivity(new Intent(getApplicationContext(),Login_User_Activity.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -139,8 +144,6 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     @Override
     protected void  onActivityResult(int requestCode,int resultCode,@Nullable Intent data)
     {
-
-        //mandar a imagem para a imageButton
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==CAMERA_ACTION_CODE&&resultCode==RESULT_OK&&data!=null)
         {
@@ -153,6 +156,12 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
             fotoembyte=streamDaFotoEmBytes.toByteArray();
             fotoemString= Base64.encodeToString(fotoembyte,Base64.DEFAULT);
 
+        }
+        if (requestCode==0)
+        {
+            mSelectedUri = data.getData();
+            binding.imgfotoperfil.setImageURI(mSelectedUri);
+            fotoUriemString=mSelectedUri.toString();
         }
     }
 

@@ -36,10 +36,11 @@ public class Login_User_Activity extends AppCompatActivity {
         binding=ActivityLoginUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
-
-       binding.txtcriarconta.setOnClickListener(view -> startActivity(new Intent(this,Register_User_Activity.class)));
+       binding.txtcriarconta.setOnClickListener(view ->
+       {
+           startActivity(new Intent(this,Register_User_Activity.class));
+           finish();
+       });
 
        binding.txtrecuperarconta.setOnClickListener(view -> startActivity(new Intent(this,Repor_Pass_Activity.class)));
 
