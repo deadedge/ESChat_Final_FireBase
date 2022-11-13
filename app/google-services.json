@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "273296791551",
+    "project_id": "eschat-446dd",
+    "storage_bucket": "eschat-446dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273296791551:android:2e10cdd7369bc2cde739ca",
+        "android_client_info": {
+          "package_name": "com.example.eschat_final_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273296791551-gg9v6h7ahamoka4rhs3ffi8in6en8ref.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm8DysV44N0R9iLVP9gVE8oErA5y8VXz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273296791551-gg9v6h7ahamoka4rhs3ffi8in6en8ref.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

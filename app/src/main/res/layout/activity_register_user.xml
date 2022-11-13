@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".Register_User_Activity" >
+
+    <EditText
+        android:id="@+id/editemail"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/custom_buttonregister"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"
+        android:textAllCaps="false"
+        android:textColor="#ffffff "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editpass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editpass"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/custom_buttonregister"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Senha"
+        android:textAllCaps="false"
+        android:textColor="#ffffff "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnregister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtESChat"
+        android:layout_width="174dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="96dp"
+        android:text="ESChat"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnregister"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/custom_buttonregister"
+        android:backgroundTint="#3F51B5"
+        android:paddingLeft="0dp"
+        android:text="Registrar"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editnomeuser"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/custom_buttonregister"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nome de utilizador"
+        android:textAllCaps="false"
+        android:textColor="#ffffff "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editemail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editnomecompleto"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_buttonregister"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nome completo"
+        android:textAllCaps="false"
+        android:textColor="#ffffff "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editnomeuser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
