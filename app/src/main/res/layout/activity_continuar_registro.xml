@@ -6,4 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".Continuar_Registro_Activity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgfotoperfil"
+        android:layout_width="272dp"
+        android:layout_height="256dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/foto_sem_nada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <DatePicker
+        android:id="@+id/dateaniversario"
+        android:layout_width="240dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="36dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editbiografia" />
+
+    <EditText
+        android:id="@+id/editbiografia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/custom_buttons"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="7dp"
+        android:text="Biografia"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgfotoperfil" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btncontinuarregistro"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:text="Continuar"
+        android:textColor="@color/white"
+        android:backgroundTint="#3F51B5"
+        android:background="@drawable/custom_buttonregister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateaniversario" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

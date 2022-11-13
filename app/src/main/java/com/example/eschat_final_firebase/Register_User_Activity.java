@@ -95,15 +95,26 @@ public class Register_User_Activity extends AppCompatActivity {
             Toast.makeText(this,"Preencha o seu email",Toast.LENGTH_SHORT).show();
         }
     }
-    private void criarContaFireBase(String email,String senha,String nomeCompleto,String nomeUtilizador)
+    private void criarComCriacaoContaFireBase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
 
-        Map<String, Object> user = new HashMap<>();
+        Intent intent=new Intent(getApplicationContext(),Continuar_Registro_Activity.class);
+        intent.putExtra("email",email);
+        intent.putExtra("senha",senha);
+        intent.putExtra("nomeCompleto",nomeCompleto);
+        intent.putExtra("nomeUtilizador",nomeUtilizador);
+        startActivity(intent);
+
+
+
+       /* Map<String, Object> user = new HashMap<>();
         user.put("email", email);
         user.put("senha", senha);
         user.put("nome_completo", nomeCompleto);
         user.put("nome_utilizador",nomeUtilizador);
         user.put("admin",false);
+
+
 
 
 
@@ -121,8 +132,11 @@ public class Register_User_Activity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getApplicationContext(),"Erro",Toast.LENGTH_SHORT).show();
                     }
-                })
+                })*/
+
+
     ;}
+
     private void verificarContaFirebase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
         db.collection("user")
@@ -141,7 +155,7 @@ public class Register_User_Activity extends AppCompatActivity {
                             }
                             if (jaUtilizado==false)
                             {
-                                criarContaFireBase(email,senha,nomeCompleto,nomeUtilizador);
+                                criarComCriacaoContaFireBase(email,senha,nomeCompleto,nomeUtilizador);
                                 jaUtilizado=false;
                             }
                         } else {
