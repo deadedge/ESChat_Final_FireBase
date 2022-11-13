@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_add_24"
         android:id="@+id/foto"/>
     <item android:title="Prefile"
-        android:icon="@drawable/foto_sem_nada"
+        android:icon="@drawable/foto_sem_nada_convertida_final"
         android:id="@+id/profile"/>
 
 
