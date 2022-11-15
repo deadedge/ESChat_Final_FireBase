@@ -73,5 +73,6 @@ public class ProfileMyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //Todo o codigo do fragmento vai ficar aquo
 
+
     }
 }

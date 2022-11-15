@@ -95,6 +95,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEditarMyProfile"
         android:layout_width="323dp"
         android:layout_height="50dp"
         android:background="@drawable/custom_buttonregister"
