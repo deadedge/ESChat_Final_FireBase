@@ -38,7 +38,7 @@ public class Principal_Activity extends AppCompatActivity {
 
                     break;
                 case R.id.profile:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(new ProfileMyFragment());
 
                     break;
 

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -164,5 +166,24 @@ public class Register_User_Activity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Night mode is not active, we're using the light theme
+                binding.txtESChat.setTextColor(Color.BLACK);
+                binding.backgroundregister.setBackground(getDrawable(R.drawable.colorwhite));
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Night mode is active, we're using dark theme
+                binding.txtESChat.setTextColor(Color.WHITE);
+                binding.backgroundregister.setBackground(getDrawable(R.drawable.colorblack));
+
+                break;
+        }
     }
 }

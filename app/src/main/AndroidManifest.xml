@@ -35,6 +35,8 @@
             android:name=".Register_User_Activity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:configChanges="uiMode"
+
             >
             <meta-data
                 android:name="android.app.lib_name"
@@ -53,6 +55,7 @@
             android:name=".Login_User_Activity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:configChanges="uiMode"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
