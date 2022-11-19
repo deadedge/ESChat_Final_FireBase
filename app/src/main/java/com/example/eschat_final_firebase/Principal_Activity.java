@@ -12,6 +12,8 @@ import com.example.eschat_final_firebase.databinding.ActivityPrincipalBinding;
 public class Principal_Activity extends AppCompatActivity {
 
     ActivityPrincipalBinding binding;
+    Bundle bundle;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,8 @@ public class Principal_Activity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(binding.getRoot());
         replaceFragment(new MensagensFragment());
+        id=getIntent().getStringExtra("id");
+
 
         binding.bottomNavigationView.setOnItemSelectedListener(item ->
         {
@@ -39,24 +43,22 @@ public class Principal_Activity extends AppCompatActivity {
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileMyFragment());
-
                     break;
-
-
             }
-
-
-
-
             return true;
         });
     }
 
     private void replaceFragment(Fragment fragment)
     {
+
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        Bundle bundle=new Bundle();
+        bundle.putString("USER_ID",id);
+        fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+
 }

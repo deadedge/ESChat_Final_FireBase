@@ -1,16 +1,27 @@
 package com.example.eschat_final_firebase;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.eschat_final_firebase.databinding.FragmentMyProfileBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +40,8 @@ public class ProfileMyFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String id;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ProfileMyFragment() {
         // Required empty public constructor
@@ -65,14 +78,69 @@ public class ProfileMyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding=FragmentMyProfileBinding.inflate(inflater, container, false);
+        id=this.getArguments().getString("USER_ID");
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Todo o codigo do fragmento vai ficar aquo
+        //Todo o codigo do fragmento vai ficar aqui
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getId().equals(id))
+                                {
+                                    String fotoEmString=document.getString("foto_Bitmap_Utilizador");
+                                    String fotoEmUri=document.getString("foto_uri_utilizador");
+                                    binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
+                                    binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
+                                    try {
+                                        if (!fotoEmString.equals(null))
+                                        {
+                                            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        binding.imgfotoMyperfil.setImageURI(converterStringToUri(fotoEmUri));
+                                        //falta pedir permissao para acessar a ficheiros ex-MANAGE_EXTERNAL_STORAGE
+                                    }
 
 
+
+
+
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "Erro", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
+    Bitmap converterStringToBitMap(String fotoEmString)
+    {
+        byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    }
+    Uri converterStringToUri(String fotoEmUri)
+    {
+        Uri uri;
+        uri = Uri.parse(fotoEmUri);
+        return uri;
+    }
+   /* public static int checkSelfPermission(@NonNull Context context, @NonNull String permission)
+    {
+
+    }*/
+
 }

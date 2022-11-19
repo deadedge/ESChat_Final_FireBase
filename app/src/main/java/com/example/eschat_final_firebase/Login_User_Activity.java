@@ -33,6 +33,7 @@ public class Login_User_Activity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean userExist = false;
     Configuration config;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class Login_User_Activity extends AppCompatActivity {
         getSupportActionBar().hide();
         binding = ActivityLoginUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
 
 
@@ -83,11 +83,15 @@ public class Login_User_Activity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.getString("email").equals(email) && document.getString("senha").equals(senha)) {
                                     Toast.makeText(getApplicationContext(), "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
+
+                                    id=document.getId();
                                     userExist = true;
                                     hideKeyboard(Login_User_Activity.this);
                                     binding.pbLogin.setVisibility(View.VISIBLE);
                                     finish();
-                                    startActivity(new Intent(getApplicationContext(), Principal_Activity.class));
+                                    Intent intent=new Intent(getApplicationContext(),Principal_Activity.class);
+                                    intent.putExtra("id",id);
+                                    startActivity(intent);
                                     break;
                                 }
                             }
