@@ -1,6 +1,11 @@
 package com.example.eschat_final_firebase;
 
+import static androidx.core.content.ContextCompat.checkSelfPermission;
+
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,6 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileMyFragment#newInstance} factory method to
@@ -42,6 +50,9 @@ public class ProfileMyFragment extends Fragment {
     private String mParam2;
     private String id;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final int LOCATION_REQUEST = 222;
+    String  fotoEmUri;
+
 
     public ProfileMyFragment() {
         // Required empty public constructor
@@ -96,7 +107,7 @@ public class ProfileMyFragment extends Fragment {
                                 if (document.getId().equals(id))
                                 {
                                     String fotoEmString=document.getString("foto_Bitmap_Utilizador");
-                                    String fotoEmUri=document.getString("foto_uri_utilizador");
+                                    fotoEmUri=document.getString("foto_uri_utilizador");
                                     binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
                                     binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
                                     try {
@@ -108,8 +119,7 @@ public class ProfileMyFragment extends Fragment {
                                     }
                                     catch (Exception e)
                                     {
-                                        binding.imgfotoMyperfil.setImageURI(converterStringToUri(fotoEmUri));
-                                        //falta pedir permissao para acessar a ficheiros ex-MANAGE_EXTERNAL_STORAGE
+                                        //falta pedir permissao para acessar a ficheiros CODIGO-MANAGE_EXTERNAL_STORAGE
                                     }
 
 
@@ -138,9 +148,6 @@ public class ProfileMyFragment extends Fragment {
         uri = Uri.parse(fotoEmUri);
         return uri;
     }
-   /* public static int checkSelfPermission(@NonNull Context context, @NonNull String permission)
-    {
 
-    }*/
 
 }

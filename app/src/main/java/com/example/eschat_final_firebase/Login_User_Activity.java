@@ -1,11 +1,17 @@
 package com.example.eschat_final_firebase;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -34,6 +40,7 @@ public class Login_User_Activity extends AppCompatActivity {
     boolean userExist = false;
     Configuration config;
     String id;
+    private int STRORAGE_PERMISSION_CODE=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,15 @@ public class Login_User_Activity extends AppCompatActivity {
         getSupportActionBar().hide();
         binding = ActivityLoginUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.MANAGE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(getApplicationContext(),"Ja deste esta permissao",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            requestStoragePermission();
+        }
 
 
 
@@ -138,6 +154,29 @@ public class Login_User_Activity extends AppCompatActivity {
                 binding.backgroundlogin.setBackground(getDrawable(R.drawable.colorblack));
 
                 break;
+        }
+    }
+
+    private void requestStoragePermission()
+    {
+        ActivityCompat.requestPermissions(Login_User_Activity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STRORAGE_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==STRORAGE_PERMISSION_CODE)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                //mostra se a permissao for dada
+               // Toast.makeText(getApplicationContext(),"Permissao Dada", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                //mostra se a permissao nao for dada
+               // Toast.makeText(getApplicationContext(),"Permissao negada", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
