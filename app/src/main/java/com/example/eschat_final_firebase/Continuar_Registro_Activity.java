@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     int mes=0;
     int ano=0;
     private Uri mSelectedUri;
+    String encoded;
 
 
 
@@ -117,7 +119,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
         user.put("nome_Completo", nomeCompleto);
         user.put("nome_Utilizador",nomeUtilizador);
         user.put("foto_Bitmap_Utilizador",fotoemString);
-        user.put("foto_uri_utilizador",fotoUriemString);
+        user.put("foto_uri_utilizador",encoded);
         user.put("biografia",biografia);
         user.put("data_de_Nascimento",dataCompleta);
         user.put("admin",false);
@@ -159,9 +161,27 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
         }
         if (requestCode==0)
         {
-            mSelectedUri = data.getData();
+            //pega o uri da imagem e converte para String
+            /*mSelectedUri = data.getData();
             binding.imgfotoperfil.setImageURI(mSelectedUri);
-            fotoUriemString=mSelectedUri.toString();
+            fotoUriemString=mSelectedUri.toString();*/
+
+
+            //Converte Uri para BitMap e depois para String
+            Uri imageUri = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+            //BASE64
+             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+             binding.imgfotoperfil.setImageBitmap(bitmap);
         }
     }
 

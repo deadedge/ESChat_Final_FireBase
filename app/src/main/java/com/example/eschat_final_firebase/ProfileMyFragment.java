@@ -51,7 +51,8 @@ public class ProfileMyFragment extends Fragment {
     private String id;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final int LOCATION_REQUEST = 222;
-    String  fotoEmUri;
+    Uri uri;
+
 
 
     public ProfileMyFragment() {
@@ -107,7 +108,7 @@ public class ProfileMyFragment extends Fragment {
                                 if (document.getId().equals(id))
                                 {
                                     String fotoEmString=document.getString("foto_Bitmap_Utilizador");
-                                    fotoEmUri=document.getString("foto_uri_utilizador");
+                                    String fotoEmUri=document.getString("foto_uri_utilizador");
                                     binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
                                     binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
                                     try {
@@ -119,14 +120,10 @@ public class ProfileMyFragment extends Fragment {
                                     }
                                     catch (Exception e)
                                     {
-                                        //falta pedir permissao para acessar a ficheiros CODIGO-MANAGE_EXTERNAL_STORAGE
+
+                                        binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmUri));
+
                                     }
-
-
-
-
-
-
                                 }
                             }
                         }
@@ -142,12 +139,18 @@ public class ProfileMyFragment extends Fragment {
         byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
-    Uri converterStringToUri(String fotoEmUri)
+
+
+
+    //Converter String para uri
+   /* Uri converterStringToUri(String fotoEmUri)
     {
-        Uri uri;
         uri = Uri.parse(fotoEmUri);
         return uri;
-    }
+    }*/
+
+
+
 
 
 }
