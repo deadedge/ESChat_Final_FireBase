@@ -115,14 +115,11 @@ public class ProfileMyFragment extends Fragment {
                                         if (!fotoEmString.equals(null))
                                         {
                                             binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
-
                                         }
                                     }
                                     catch (Exception e)
                                     {
-
                                         binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmUri));
-
                                     }
                                 }
                             }
@@ -139,8 +136,6 @@ public class ProfileMyFragment extends Fragment {
         byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
-
-
 
     //Converter String para uri
    /* Uri converterStringToUri(String fotoEmUri)
