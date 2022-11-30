@@ -23,16 +23,17 @@
         android:textStyle="bold"
         android:textSize="17dp"
         />
+
     <TextView
         android:id="@+id/txtBiografiaMyProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginTop="185dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="185dp"
+        android:text="TextView"
         android:textSize="17dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/txtContaPublicacoesMyProfile"
         android:layout_width="wrap_content"

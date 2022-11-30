@@ -104,7 +104,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     }
     private void criarContaFireBase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
-
+        fotoemString="none";
         //pegar valor da data e da biografia
         biografia=binding.editbiografia.getText().toString().trim();
         dia=binding.dateaniversario.getDayOfMonth();
@@ -119,7 +119,6 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
         user.put("nome_Completo", nomeCompleto);
         user.put("nome_Utilizador",nomeUtilizador);
         user.put("foto_Bitmap_Utilizador",fotoemString);
-        user.put("foto_uri_utilizador",encoded);
         user.put("biografia",biografia);
         user.put("data_de_Nascimento",dataCompleta);
         user.put("admin",false);
@@ -180,7 +179,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
             byte[] byteArray = byteArrayOutputStream.toByteArray();
 
             //BASE64
-             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+             fotoemString = Base64.encodeToString(byteArray, Base64.DEFAULT);
              binding.imgfotoperfil.setImageBitmap(bitmap);
         }
     }

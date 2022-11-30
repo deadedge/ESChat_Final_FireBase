@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditarMyProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgEditMyProfile"
+        android:layout_width="122dp"
+        android:layout_height="111dp"
+        android:src="@drawable/foto_sem_nada"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="100dp"
+        />
+    <EditText
+        android:id="@+id/Editnomeuse"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="-200dp"
+        android:hint="Nome Utilizador"
+        android:background="@drawable/custom_edit"
+        />
+    <EditText
+        android:id="@+id/EditBiografiaProfile"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="-274dp"
+        android:hint="Biografia"
+        android:background="@drawable/custom_edit"
+        />
+
+    <ImageView
+        android:id="@+id/btnclose"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_close_branco"
+        android:layout_marginLeft="-343dp"
+        android:layout_marginTop="5dp"
+        />
+        <TextView
+            android:id="@+id/txtEditarprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="3dp"
+            />
+    <ImageView
+        android:id="@+id/btnconfirmar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_check_24_azul"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="5dp"
+        />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+

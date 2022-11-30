@@ -50,6 +50,7 @@ public class ProfileMyFragment extends Fragment {
     private String mParam2;
     private String id;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String fotoEmString;
     private static final int LOCATION_REQUEST = 222;
     Uri uri;
 
@@ -107,20 +108,18 @@ public class ProfileMyFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.getId().equals(id))
                                 {
-                                    String fotoEmString=document.getString("foto_Bitmap_Utilizador");
-                                    String fotoEmUri=document.getString("foto_uri_utilizador");
+                                    fotoEmString=document.getString("foto_Bitmap_Utilizador");
                                     binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
                                     binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
-                                    try {
-                                        if (!fotoEmString.equals(null))
+                                        if (fotoEmString.equals("none"))
+                                        {
+                                            binding.imgfotoMyperfil.setImageResource(R.drawable.foto_sem_nada);
+                                        }
+                                        else
                                         {
                                             binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+
                                         }
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmUri));
-                                    }
                                 }
                             }
                         }
@@ -130,6 +129,14 @@ public class ProfileMyFragment extends Fragment {
                         }
                     }
                 });
+
+
+        binding.btnEditarMyProfile.setOnClickListener(view1 ->
+        {
+            Intent intent=new Intent(getActivity(),EditarMyProfileActivity.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
+        });
     }
     Bitmap converterStringToBitMap(String fotoEmString)
     {
