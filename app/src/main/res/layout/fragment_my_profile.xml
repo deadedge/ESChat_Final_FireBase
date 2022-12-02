@@ -100,10 +100,11 @@
         android:layout_width="323dp"
         android:layout_height="50dp"
         android:background="@drawable/custom_buttonregister"
-        android:text="Editar perfile"
+        android:text="Editar perfil"
         android:textColor="@color/white"
         android:layout_marginTop="340dp"
         android:layout_marginLeft="35dp"
+        android:textAlignment="center"
 
         />
 

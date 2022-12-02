@@ -44,6 +44,9 @@ public class Principal_Activity extends AppCompatActivity {
                 case R.id.profile:
                     replaceFragment(new ProfileMyFragment());
                     break;
+                case R.id.settings:
+                    replaceFragment(new DefinicoesFragment());
+                    break;
             }
             return true;
         });

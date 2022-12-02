@@ -46,6 +46,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     boolean biografiaigual=false;
     boolean nomeuserigual=false;
     boolean fotoperfiligual=false;
+    boolean fotoigual=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +56,6 @@ public class EditarMyProfileActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         id=getIntent().getStringExtra("id");
         carregarCampos();
-
-
 
 
 
@@ -95,24 +94,19 @@ public class EditarMyProfileActivity extends AppCompatActivity {
                 }
             });
             builder.show();
-
-
-
-
         });
-
         binding.btnconfirmar.setOnClickListener(view ->
         {
-            biografia=binding.EditBiografiaProfile.getText().toString().trim();
+            /*biografia=binding.EditBiografiaProfile.getText().toString().trim();
             nomeuser=binding.Editnomeuse.getText().toString().trim();
             DocumentReference docRef = db.collection("user").document(id);
             docRef.update("biografia",biografia );
             docRef.update("nome_Utilizador",nomeuser);
-            docRef.update("foto_Bitmap_Utilizador",fotoemString);
+            docRef.update("foto_Bitmap_Utilizador",fotoemString);*/
+            verificarCampos();
+            finish();
         });
         binding.btnclose.setOnClickListener(view -> finish());
-
-
 
     }
 
@@ -171,24 +165,32 @@ public class EditarMyProfileActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.getId().equals(id) && document.getString("biografia").equals(biografia)) {
-                                        biografiaigual=true;
-                                        if (document.getId().equals(id) && document.getString("nome_Utilizador").equals(nomeuser))
-                                        {
-                                            nomeuserigual=true;
-                                            if (document.getId().equals(id) && document.getString("foto_Bitmap_Utilizador").equals(nomeuser))
-                                            {
-
-                                            }
-                                        }
-                                        else
-                                        {
-                                            nomeuserigual=false;
-                                        }
+                                    biografiaigual=true;
                                 }
                                 else
                                 {
                                     biografiaigual=false;
                                 }
+                                if (document.getId().equals(id) && document.getString("nome_Utilizador").equals(nomeuser)) {
+                                    nomeuserigual = true;
+                                }
+                                else
+                                {
+                                    nomeuserigual=false;
+
+                                }
+                                if (document.getId().equals(id) && document.getString("foto_Bitmap_Utilizador").equals(nomeuser))
+                                {
+                                    fotoigual=true;
+                                    CarregarDadosNaBaseDeDados();
+                                }
+                                else
+                                {
+                                    fotoigual=false;
+                                    CarregarDadosNaBaseDeDados();
+                                }
+
+
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "Erro", Toast.LENGTH_SHORT).show();
@@ -198,8 +200,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     }
     public void carregarCampos()
     {
-        biografia=binding.EditBiografiaProfile.getText().toString().trim();
-        nomeuser=binding.Editnomeuse.getText().toString().trim();
+
         db.collection("user")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -209,6 +210,8 @@ public class EditarMyProfileActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.getId().equals(id))
                                 {
+                                    biografia=document.getString("biografia");
+                                    nomeuser=document.getString("nome_Utilizador");
                                     fotoemString=document.getString("foto_Bitmap_Utilizador");
                                     binding.imgEditMyProfile.setImageBitmap(converterStringToBitMap(fotoemString));
                                     binding.EditBiografiaProfile.setText(biografia);
@@ -224,6 +227,37 @@ public class EditarMyProfileActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void CarregarDadosNaBaseDeDados()
+    {
+
+        if (biografiaigual==true)
+        {
+
+        }
+        else
+        {
+            DocumentReference docRef = db.collection("user").document(id);
+            docRef.update("biografia",biografia );
+        }
+        if (nomeuserigual==true)
+        {
+
+        }
+        else
+        {
+            DocumentReference docRef = db.collection("user").document(id);
+            docRef.update("nome_Utilizador",nomeuser );
+        }
+        if (fotoigual==true)
+        {
+
+        }
+        else
+        {
+            DocumentReference docRef = db.collection("user").document(id);
+            docRef.update("foto_Bitmap_Utilizador",fotoemString );
+        }
     }
     Bitmap converterStringToBitMap(String fotoEmString)
     {

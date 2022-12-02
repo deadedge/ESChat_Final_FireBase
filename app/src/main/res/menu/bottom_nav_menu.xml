@@ -10,9 +10,15 @@
     <item android:title="Adicionar foto"
         android:icon="@drawable/ic_add_24"
         android:id="@+id/foto"/>
-    <item android:title="Prefile"
+    <item android:title="Perfil"
         android:icon="@drawable/foto_sem_nada_convertida_final"
         android:id="@+id/profile"/>
+    <item
+        android:title="Definições"
+        android:icon="@drawable/ic_settings_24"
+        android:id="@+id/settings"
+
+        />
 
 
 </menu>
