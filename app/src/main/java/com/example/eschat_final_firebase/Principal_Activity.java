@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.eschat_final_firebase.databinding.ActivityPrincipalBinding;
@@ -63,5 +64,10 @@ public class Principal_Activity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 }

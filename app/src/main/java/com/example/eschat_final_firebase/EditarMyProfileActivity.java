@@ -156,8 +156,8 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     public  void verificarCampos()
     {
       biografia=binding.EditBiografiaProfile.getText().toString().trim();
-      nomeuser=binding.Editnomeuse.getText().toString().trim();
-        db.collection("user")
+nomeuser=binding.Editnomeuse.getText().toString().trim();
+db.collection("user")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
