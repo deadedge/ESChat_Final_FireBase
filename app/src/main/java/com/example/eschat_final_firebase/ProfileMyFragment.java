@@ -171,9 +171,9 @@ public class ProfileMyFragment extends Fragment {
 
         if(requestCode==1000)
         {
-            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotouser));
             binding.txtNomeUserMyProfile.setText(nomeuser);
-            binding.txtBiografiaMyProfile.setText(nomeuser);
+            binding.txtBiografiaMyProfile.setText(biografia);
 
         }
 
