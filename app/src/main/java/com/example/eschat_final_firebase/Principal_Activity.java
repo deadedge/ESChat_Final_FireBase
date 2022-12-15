@@ -1,5 +1,6 @@
 package com.example.eschat_final_firebase;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -64,10 +65,10 @@ public class Principal_Activity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
+
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 }

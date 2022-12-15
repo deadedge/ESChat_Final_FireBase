@@ -23,7 +23,11 @@ import android.widget.Toast;
 
 import com.example.eschat_final_firebase.databinding.FragmentMyProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -55,6 +59,7 @@ public class ProfileMyFragment extends Fragment {
     Uri uri;
     boolean jacarregou=false;
     int i=0;
+    public boolean jaleutudo=false;
 
 
 
@@ -102,36 +107,8 @@ public class ProfileMyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Todo o codigo do fragmento vai ficar aqui
-        db.collection("user")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(id))
-                                {
-                                    fotoEmString=document.getString("foto_Bitmap_Utilizador");
-                                    binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
-                                    binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
-                                        if (fotoEmString.equals("none"))
-                                        {
-                                            binding.imgfotoMyperfil.setImageResource(R.drawable.foto_sem_nada);
-                                        }
-                                        else
-                                        {
-                                            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+        carregarCaixasTexto();
 
-                                        }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Toast.makeText(getContext(), "Erro", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
 
 
         binding.btnEditarMyProfile.setOnClickListener(view1 ->
@@ -147,46 +124,67 @@ public class ProfileMyFragment extends Fragment {
         byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
+        public void carregarCaixasTexto()
+        {
+            db.collection("user")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if (document.getId().equals(id))
+                                    {
+                                        fotoEmString=document.getString("foto_Bitmap_Utilizador");
+                                        binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
+                                        binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
+                                        if (fotoEmString.equals("none"))
+                                        {
+                                            binding.imgfotoMyperfil.setImageResource(R.drawable.foto_sem_nada);
+                                        }
+                                        else
+                                        {
+                                            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Toast.makeText(getContext(), "Erro", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-       super.onActivityResult(requestCode, resultCode, data);
-       if (requestCode==1000)
-       {
-           for (i=0;jacarregou==true;i++) {
-               db.collection("user")
-                       .get()
-                       .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                           @Override
-                           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-                               if (task.isSuccessful()) {
-                                   for (QueryDocumentSnapshot document : task.getResult()) {
-                                       if (document.getId().equals(id)) {
-                                           jacarregou = true;
-                                           fotoEmString = document.getString("foto_Bitmap_Utilizador");
-                                           binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
-                                           binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
-                                           if (fotoEmString.equals("none")) {
-                                               binding.imgfotoMyperfil.setImageResource(R.drawable.foto_sem_nada);
-                                           } else {
-                                               binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
-
-                                           }
-                                       }
-                                   }
-                               } else {
-                                   Toast.makeText(getContext(), "Erro", Toast.LENGTH_SHORT).show();
-                               }
-                           }
-
-                       });
-           }
-       }
+        String fotouser=data.getStringExtra("fotoUser");
+        String biografia=data.getStringExtra("biografia");
+        String nomeuser=data.getStringExtra("nomeUser");
 
 
+
+        if(requestCode==1000)
+        {
+            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotoEmString));
+            binding.txtNomeUserMyProfile.setText(nomeuser);
+            binding.txtBiografiaMyProfile.setText(nomeuser);
+
+        }
 
     }
+
+}
+
+
+
+
+
 
 
 
@@ -205,4 +203,4 @@ public class ProfileMyFragment extends Fragment {
 
 
 
-}
+

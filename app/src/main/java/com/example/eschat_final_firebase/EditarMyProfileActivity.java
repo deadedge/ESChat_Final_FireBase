@@ -104,6 +104,11 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             docRef.update("nome_Utilizador",nomeuser);
             docRef.update("foto_Bitmap_Utilizador",fotoemString);*/
             verificarCampos();
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("fotoUser",fotoemString);
+            returnIntent.putExtra("biografia",biografia);
+            returnIntent.putExtra("nomeUser",nomeuser);
+            setResult(1000,returnIntent);
             finish();
         });
         binding.btnclose.setOnClickListener(view -> finish());
