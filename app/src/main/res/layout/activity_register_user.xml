@@ -99,7 +99,7 @@
         android:background="@drawable/custom_edit"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Nome completo"
+        android:hint="Nome"
         android:textAllCaps="false"
         android:textColor="#ffffff "
         android:textSize="20sp"

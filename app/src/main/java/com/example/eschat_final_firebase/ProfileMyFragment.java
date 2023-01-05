@@ -137,7 +137,8 @@ public class ProfileMyFragment extends Fragment {
                                     {
                                         fotoEmString=document.getString("foto_Bitmap_Utilizador");
                                         binding.txtBiografiaMyProfile.setText(document.getString("biografia"));
-                                        binding.txtNomeUserMyProfile.setText(document.getString("nome_Utilizador"));
+                                        binding.txtNomeUtilizador.setText(document.getString("nome_Utilizador"));
+                                        binding.txtnome.setText(document.getString("nome_Completo"));
                                         if (fotoEmString.equals("none"))
                                         {
                                             binding.imgfotoMyperfil.setImageResource(R.drawable.foto_sem_nada);
@@ -163,18 +164,22 @@ public class ProfileMyFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String fotouser=data.getStringExtra("fotoUser");
-        String biografia=data.getStringExtra("biografia");
-        String nomeuser=data.getStringExtra("nomeUser");
+
 
 
 
         if(requestCode==1000)
         {
-            binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotouser));
-            binding.txtNomeUserMyProfile.setText(nomeuser);
+          //  String fotouser=data.getStringExtra("fotoUser");
+            /*String biografia=data.getStringExtra("biografia");
+            String nomeuser=data.getStringExtra("nomeUser");
+            String nome=data.getStringExtra("nome");
+          //  binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotouser));
+            binding.txtNomeUtilizador.setText(nomeuser);
             binding.txtBiografiaMyProfile.setText(biografia);
-
+            binding.txtnome.setText(nome);*/
+            //reduzir resolucao da imagem
+            //voltar a resolucao ao normal
         }
 
     }

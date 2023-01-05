@@ -25,15 +25,24 @@
         android:hint="Nome Utilizador"
         android:background="@drawable/custom_edit"
         />
+
     <EditText
         android:id="@+id/EditBiografiaProfile"
         android:layout_width="274dp"
         android:layout_height="54dp"
-        android:layout_marginTop="330dp"
         android:layout_marginLeft="-274dp"
-        android:hint="Biografia"
+        android:layout_marginTop="393dp"
         android:background="@drawable/custom_edit"
-        />
+        android:hint="Biografia" />
+
+    <EditText
+        android:id="@+id/Editnome"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="-274dp"
+        android:layout_marginTop="320dp"
+        android:background="@drawable/custom_edit"
+        android:hint="Nome" />
 
     <ImageView
         android:id="@+id/btnclose"

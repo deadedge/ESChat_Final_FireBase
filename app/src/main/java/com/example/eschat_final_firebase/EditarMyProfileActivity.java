@@ -38,6 +38,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     String id;
     String biografia;
     String nomeuser;
+    String nome;
     public static final int CAMERA_ACTION_CODE=1;
     String fotoemString;
     Bitmap finalphoto;
@@ -45,8 +46,10 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     String encoded;
     boolean biografiaigual=false;
     boolean nomeuserigual=false;
+    boolean nomeigual=false;
     boolean fotoperfiligual=false;
     boolean fotoigual=false;
+    String fotoemStringNaoMexe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,10 +111,27 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             returnIntent.putExtra("fotoUser",fotoemString);
             returnIntent.putExtra("biografia",biografia);
             returnIntent.putExtra("nomeUser",nomeuser);
+            returnIntent.putExtra("nome",nome);
             setResult(1000,returnIntent);
             finish();
         });
-        binding.btnclose.setOnClickListener(view -> finish());
+        binding.btnclose.setOnClickListener(view ->{
+          //  Intent returnIntent = new Intent();
+            if (fotoemString != fotoemStringNaoMexe)
+            {
+             //   returnIntent.putExtra("fotoUser",fotoemStringNaoMexe);
+            }
+            else
+            {
+              //  returnIntent.putExtra("fotoUser",fotoemString);
+            }
+           // returnIntent.putExtra("biografia",biografia);
+          //  returnIntent.putExtra("nomeUser",nomeuser);
+        //    returnIntent.putExtra("nome",nome);
+         //   setResult(1000,returnIntent);
+            finish();
+
+        });
 
     }
 
@@ -142,27 +162,32 @@ public class EditarMyProfileActivity extends AppCompatActivity {
 
 
             //Converte Uri para BitMap e depois para String
-            Uri imageUri = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            if (null != data)
+            {
+                Uri imageUri = data.getData();
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
 
-            //BASE64
-            fotoemString = Base64.encodeToString(byteArray, Base64.DEFAULT);
-            binding.imgEditMyProfile.setImageBitmap(bitmap);
+                //BASE64
+                fotoemString = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                binding.imgEditMyProfile.setImageBitmap(bitmap);
+            }
+
         }
     }
     public  void verificarCampos()
     {
-      biografia=binding.EditBiografiaProfile.getText().toString().trim();
-nomeuser=binding.Editnomeuse.getText().toString().trim();
-db.collection("user")
+                biografia=binding.EditBiografiaProfile.getText().toString().trim();
+                nomeuser=binding.Editnomeuse.getText().toString().trim();
+                nome=binding.Editnome.getText().toString().trim();
+                db.collection("user")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -182,6 +207,14 @@ db.collection("user")
                                 else
                                 {
                                     nomeuserigual=false;
+
+                                }
+                                if (document.getId().equals(id) && document.getString("nome_Completo").equals(nome)) {
+                                    nomeigual = true;
+                                }
+                                else
+                                {
+                                    nomeigual=false;
 
                                 }
                                 if (document.getId().equals(id) && document.getString("foto_Bitmap_Utilizador").equals(nomeuser))
@@ -217,10 +250,13 @@ db.collection("user")
                                 {
                                     biografia=document.getString("biografia");
                                     nomeuser=document.getString("nome_Utilizador");
+                                    nome=document.getString("nome_Completo");
                                     fotoemString=document.getString("foto_Bitmap_Utilizador");
+                                    fotoemStringNaoMexe=document.getString("foto_Bitmap_Utilizador");
                                     binding.imgEditMyProfile.setImageBitmap(converterStringToBitMap(fotoemString));
                                     binding.EditBiografiaProfile.setText(biografia);
                                     binding.Editnomeuse.setText(nomeuser);
+                                    binding.Editnome.setText(nome);
                                 }
                             }
 
@@ -253,6 +289,15 @@ db.collection("user")
         {
             DocumentReference docRef = db.collection("user").document(id);
             docRef.update("nome_Utilizador",nomeuser );
+        }
+        if (nomeigual==true)
+        {
+
+        }
+        else
+        {
+            DocumentReference docRef = db.collection("user").document(id);
+            docRef.update("nome_Completo",nome );
         }
         if (fotoigual==true)
         {
