@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -182,6 +186,24 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
              fotoemString = Base64.encodeToString(byteArray, Base64.DEFAULT);
              binding.imgfotoperfil.setImageBitmap(bitmap);
         }
+    }
+
+    public Bitmap reduzirResolucaoImagem(Bitmap imagem)
+    {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            /*Reduzindo a qualidade da imagem para preservar memoria.
+             * Aqui você pode testar a redução que melhor atende sua necessidade
+             */
+            options.inSampleSize = 2;
+
+            return BitmapFactory.decodeStream(new FileInputStream(String.valueOf(imagem)), null, options);
+        } catch (FileNotFoundException e) {
+            Log.d("msg", e.getMessage());
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

@@ -108,7 +108,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             docRef.update("foto_Bitmap_Utilizador",fotoemString);*/
             verificarCampos();
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("fotoUser",fotoemString);
+          //  returnIntent.putExtra("fotoUser",fotoemString);
             returnIntent.putExtra("biografia",biografia);
             returnIntent.putExtra("nomeUser",nomeuser);
             returnIntent.putExtra("nome",nome);
@@ -116,19 +116,19 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             finish();
         });
         binding.btnclose.setOnClickListener(view ->{
-          //  Intent returnIntent = new Intent();
+            Intent returnIntent = new Intent();
             if (fotoemString != fotoemStringNaoMexe)
             {
-             //   returnIntent.putExtra("fotoUser",fotoemStringNaoMexe);
+                returnIntent.putExtra("fotoUser",fotoemStringNaoMexe);
             }
             else
             {
-              //  returnIntent.putExtra("fotoUser",fotoemString);
+                returnIntent.putExtra("fotoUser",fotoemString);
             }
-           // returnIntent.putExtra("biografia",biografia);
-          //  returnIntent.putExtra("nomeUser",nomeuser);
-        //    returnIntent.putExtra("nome",nome);
-         //   setResult(1000,returnIntent);
+           returnIntent.putExtra("biografia",biografia);
+            returnIntent.putExtra("nomeUser",nomeuser);
+            returnIntent.putExtra("nome",nome);
+           setResult(1000,returnIntent);
             finish();
 
         });

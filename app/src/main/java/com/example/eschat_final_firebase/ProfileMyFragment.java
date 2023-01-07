@@ -164,20 +164,20 @@ public class ProfileMyFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
+        //  String fotouser=data.getStringExtra("fotoUser");
+            String biografia=data.getStringExtra("biografia");
+            String nomeuser=data.getStringExtra("nomeUser");
+            String nome=data.getStringExtra("nome");
 
 
 
         if(requestCode==1000)
         {
-          //  String fotouser=data.getStringExtra("fotoUser");
-            /*String biografia=data.getStringExtra("biografia");
-            String nomeuser=data.getStringExtra("nomeUser");
-            String nome=data.getStringExtra("nome");
-          //  binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotouser));
+
+          //binding.imgfotoMyperfil.setImageBitmap(converterStringToBitMap(fotouser));
             binding.txtNomeUtilizador.setText(nomeuser);
             binding.txtBiografiaMyProfile.setText(biografia);
-            binding.txtnome.setText(nome);*/
+            binding.txtnome.setText(nome);
             //reduzir resolucao da imagem
             //voltar a resolucao ao normal
         }
