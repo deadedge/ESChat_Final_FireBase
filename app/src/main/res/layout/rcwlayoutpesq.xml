@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -14,29 +14,30 @@
         android:layout_marginLeft="18dp"
         android:src="@drawable/foto_sem_nada" />
 
-    <TextView
-        android:id="@+id/txtNomeUtilizadorPesq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="20dp"
-        android:text="None"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
 
-        />
     <TextView
         android:id="@+id/txtNomePesq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="None"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="48dp"
         android:textSize="20dp"
         android:textColor="#565656"
         />
 
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/txtNomeUtilizadorPesq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-48dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:text="None"
+        />
+
+</LinearLayout>
 
 
