@@ -1,5 +1,6 @@
 package com.example.eschat_final_firebase;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -68,10 +69,18 @@ public class ProcurarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding= FragmentProcurarBinding.inflate(inflater, container, false);
-        return binding.getRoot();    }
+        return binding.getRoot();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        binding.btnola.setOnClickListener(view1 -> {
+            Intent intent=new Intent(getActivity(),Activity_Pesquisar.class);
+            startActivity(intent);
+
+        });
     }
 }

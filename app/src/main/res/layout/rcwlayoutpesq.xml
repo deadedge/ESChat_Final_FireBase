@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/black">
+    >
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgfotoperfil"
+        android:id="@+id/imgFotoPerfilPesq"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="6dp"
@@ -15,15 +15,26 @@
         android:src="@drawable/foto_sem_nada" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtNomeUtilizadorPesq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
+        android:text="None"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:id="@+id/txtNomePesq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="None"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="48dp"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="#565656"
         />
 
 </androidx.cardview.widget.CardView>

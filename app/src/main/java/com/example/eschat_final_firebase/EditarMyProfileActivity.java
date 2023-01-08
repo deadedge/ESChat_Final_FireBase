@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firestore.v1.WriteResult;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -155,13 +156,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
         }
         if (requestCode==0)
         {
-            //pega o uri da imagem e converte para String
-            /*mSelectedUri = data.getData();
-            binding.imgfotoperfil.setImageURI(mSelectedUri);
-            fotoUriemString=mSelectedUri.toString();*/
 
-
-            //Converte Uri para BitMap e depois para String
             if (null != data)
             {
                 Uri imageUri = data.getData();
@@ -314,5 +309,9 @@ public class EditarMyProfileActivity extends AppCompatActivity {
         byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
+
+
+
+
 }
 
