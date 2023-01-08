@@ -15,6 +15,13 @@
         android:theme="@style/Theme.ESChat_Final_FireBase"
         tools:targetApi="31">
         <activity
+            android:name=".Activity_Profile_Geral"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity_Pesquisar"
             android:exported="false">
             <meta-data

@@ -171,6 +171,7 @@ public class ProfileMyFragment extends Fragment {
 
 
 
+
         if(requestCode==1000)
         {
 
@@ -178,11 +179,12 @@ public class ProfileMyFragment extends Fragment {
             binding.txtNomeUtilizador.setText(nomeuser);
             binding.txtBiografiaMyProfile.setText(biografia);
             binding.txtnome.setText(nome);
-            //reduzir resolucao da imagem
-            //voltar a resolucao ao normal
+
         }
 
     }
+
+
 
 }
 

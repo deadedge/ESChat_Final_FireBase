@@ -320,8 +320,26 @@ public class EditarMyProfileActivity extends AppCompatActivity {
         previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //ainda nao esta a funcionar 100%
+        Intent returnIntent = new Intent();
+        if (fotoemString != fotoemStringNaoMexe)
+        {
+            returnIntent.putExtra("fotoUser",fotoemStringNaoMexe);
+        }
+        else
+        {
+            returnIntent.putExtra("fotoUser",fotoemString);
+        }
+        returnIntent.putExtra("biografia",biografia);
+        returnIntent.putExtra("nomeUser",nomeuser);
+        returnIntent.putExtra("nome",nome);
+        setResult(1000,returnIntent);
+        finish();
 
 
-
+    }
 }
 

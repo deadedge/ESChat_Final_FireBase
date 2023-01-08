@@ -1,6 +1,7 @@
 package com.example.eschat_final_firebase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -10,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -44,6 +47,10 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
         holder.userName.setText(pesqUser.nome_Utilizador);
         holder.name.setText(pesqUser.nome_Completo);
         holder.fotoUser.setImageBitmap(converterStingToBitmap(imagemUserString));
+        holder.cardViewPesq.setOnClickListener(view -> {
+            Intent intent=new Intent(view.getContext(),Activity_Profile_Geral.class);
+            context.startActivity(intent);
+        });
 
     }
 
@@ -106,6 +113,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
         TextView userName;
         TextView name;
         ImageView fotoUser;
+        LinearLayout cardViewPesq;
 
         public PesqViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +121,9 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
             userName=itemView.findViewById(R.id.txtNomeUtilizadorPesq);
             name=itemView.findViewById(R.id.txtNomePesq);
             fotoUser=itemView.findViewById(R.id.imgFotoPerfilPesq);
+            cardViewPesq=itemView.findViewById(R.id.cardviewPesq);
+
+
         }
     }
 

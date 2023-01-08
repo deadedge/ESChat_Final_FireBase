@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileMyFragment">
+    tools:context=".Activity_Profile_Geral">
+
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgfotoMyperfil"
-         android:layout_height="111dp"
-         android:layout_width="122dp"
+        android:id="@+id/imgfotoPerfilGeral"
+        android:layout_height="111dp"
+        android:layout_width="122dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="48dp"
         android:src="@drawable/foto_sem_nada"
         />
     <TextView
-        android:id="@+id/txtNomeUtilizador"
+        android:id="@+id/txtNomeUtilizadorPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -25,17 +27,17 @@
         />
 
     <TextView
-        android:id="@+id/txtBiografiaMyProfile"
+        android:id="@+id/txtBiografiaPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="195dp"
         android:text="TextView"
         android:textSize="17dp"
-       />
+        />
 
     <TextView
-        android:id="@+id/txtContaPublicacoesMyProfile"
+        android:id="@+id/txtContaPublicacoesPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -45,7 +47,7 @@
         android:textSize="17dp"
         />
     <TextView
-        android:id="@+id/txtPublicacoesMyProfile"
+        android:id="@+id/txtPublicacoesPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -55,7 +57,7 @@
         android:textSize="17dp"
         />
     <TextView
-        android:id="@+id/txtContaSeguidoresMyProfile"
+        android:id="@+id/txtContaSeguidoresPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -65,7 +67,7 @@
         android:textSize="17dp"
         />
     <TextView
-        android:id="@+id/txtSeguidoresMyProfile"
+        android:id="@+id/txtSeguidoresPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -75,7 +77,7 @@
         android:textSize="17dp"
         />
     <TextView
-        android:id="@+id/txtContaSeguindoMyProfile"
+        android:id="@+id/txtContaSeguindoPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17dp"
@@ -85,7 +87,7 @@
         android:text="0"
         />
     <TextView
-        android:id="@+id/txtSeguindoMyProfile"
+        android:id="@+id/txtSeguindoPerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -96,20 +98,32 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEditarMyProfile"
-        android:layout_width="323dp"
+        android:id="@+id/btnMensagemPerfilGeral"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:background="@drawable/custom_buttonregister"
-        android:text="Editar perfil"
+        android:text="Mensagem"
         android:textColor="@color/white"
         android:layout_marginTop="340dp"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="200dp"
+        android:textAlignment="center"
+
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnseguirPerfilGeral"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_buttonregister"
+        android:text="Seguir"
+        android:textColor="@color/white"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="40dp"
         android:textAlignment="center"
 
         />
 
     <TextView
-        android:id="@+id/txtnome"
+        android:id="@+id/txtnomePerfilGeral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="165dp"
@@ -117,6 +131,5 @@
         android:textSize="17dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold"/>
-
 
 </FrameLayout>
