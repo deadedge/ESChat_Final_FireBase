@@ -51,6 +51,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     boolean fotoperfiligual=false;
     boolean fotoigual=false;
     String fotoemStringNaoMexe;
+    Bitmap previewBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,7 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             docRef.update("foto_Bitmap_Utilizador",fotoemString);*/
             verificarCampos();
             Intent returnIntent = new Intent();
-          //  returnIntent.putExtra("fotoUser",fotoemString);
+            returnIntent.putExtra("fotoUser",fotoemString);
             returnIntent.putExtra("biografia",biografia);
             returnIntent.putExtra("nomeUser",nomeuser);
             returnIntent.putExtra("nome",nome);
@@ -147,9 +148,10 @@ public class EditarMyProfileActivity extends AppCompatActivity {
             Bundle bundle=data.getExtras();
             finalphoto= (Bitmap) bundle.get("data");
             binding.imgEditMyProfile.setImageBitmap(finalphoto);
+            reduzirTamanhoImagem(finalphoto);
             //Converter a imagem de Bitmap para String
             ByteArrayOutputStream streamDaFotoEmBytes=new ByteArrayOutputStream();
-            finalphoto.compress(Bitmap.CompressFormat.PNG,70,streamDaFotoEmBytes);
+            previewBitmap.compress(Bitmap.CompressFormat.PNG,70,streamDaFotoEmBytes);
             fotoembyte=streamDaFotoEmBytes.toByteArray();
             fotoemString= Base64.encodeToString(fotoembyte,Base64.DEFAULT);
 
@@ -163,11 +165,12 @@ public class EditarMyProfileActivity extends AppCompatActivity {
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    reduzirTamanhoImagem(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                previewBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                 //BASE64
@@ -308,6 +311,13 @@ public class EditarMyProfileActivity extends AppCompatActivity {
     {
         byte[] bytes= Base64.decode(fotoEmString,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    }
+
+    public void reduzirTamanhoImagem(Bitmap bitmap)
+    {
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
+        previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
     }
 
 

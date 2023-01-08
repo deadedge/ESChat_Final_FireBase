@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.ProgressBar;
 
@@ -61,6 +63,23 @@ public class Activity_Pesquisar extends AppCompatActivity {
 
         EventChangedListener();
 
+       binding.editpesquisarusers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String valorPesquisa=binding.editpesquisarusers.getText().toString().trim();
+                pesqAdapter.getFilter().filter(valorPesquisa);
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
 
 
 
@@ -83,7 +102,7 @@ public class Activity_Pesquisar extends AppCompatActivity {
 
                         for (DocumentChange dc:value.getDocumentChanges())
                         {
-                            if (dc.getType()== DocumentChange.Type.ADDED)
+                            if (dc.getType() == DocumentChange.Type.ADDED)
                             {
                                 pesqUsersArrayList.add(dc.getDocument().toObject(PesqUser.class));
                             }
@@ -99,4 +118,5 @@ public class Activity_Pesquisar extends AppCompatActivity {
                 });
 
     }
+
 }

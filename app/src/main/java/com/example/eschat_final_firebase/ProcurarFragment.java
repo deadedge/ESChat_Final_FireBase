@@ -75,12 +75,12 @@ public class ProcurarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        binding.btnola.setOnClickListener(view1 -> {
-            Intent intent=new Intent(getActivity(),Activity_Pesquisar.class);
-            startActivity(intent);
-
+        binding.editActivitypesquisarusers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),Activity_Pesquisar.class);
+                startActivity(intent);
+            }
         });
     }
 }

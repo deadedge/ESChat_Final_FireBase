@@ -1,9 +1,14 @@
 package com.example.eschat_final_firebase;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,10 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder> {
+public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder> implements Filterable {
 
     Context context;
     ArrayList<PesqUser>  pesqUserArrayList;
+    String imagemUserString;
 
     public PesqAdapter(Context context, ArrayList<PesqUser> pesqUserArrayList) {
         this.context = context;
@@ -34,8 +40,10 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
     public void onBindViewHolder(@NonNull PesqAdapter.PesqViewHolder holder, int position) {
 
         PesqUser pesqUser=pesqUserArrayList.get(position);
+        imagemUserString=pesqUser.foto_Bitmap_Utilizador;
         holder.userName.setText(pesqUser.nome_Utilizador);
         holder.name.setText(pesqUser.nome_Completo);
+        holder.fotoUser.setImageBitmap(converterStingToBitmap(imagemUserString));
 
     }
 
@@ -43,6 +51,54 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
     public int getItemCount() {
         return pesqUserArrayList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return newsFilter;
+    }
+
+
+    private final Filter newsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            ArrayList<PesqUser> filteredNewsList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+
+                filteredNewsList.addAll(pesqUserArrayList);
+
+            }else {
+
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (PesqUser utilizador : pesqUserArrayList){
+
+                    if (utilizador.getNome_Utilizador().toLowerCase().contains(filterPattern))
+                        filteredNewsList.add(utilizador);
+
+                }
+
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredNewsList;
+            results.count = filteredNewsList.size();
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+
+            pesqUserArrayList.clear();
+            pesqUserArrayList.addAll((ArrayList)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
 
     public static class PesqViewHolder extends RecyclerView.ViewHolder
     {
@@ -59,4 +115,12 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
             fotoUser=itemView.findViewById(R.id.imgFotoPerfilPesq);
         }
     }
+
+    Bitmap converterStingToBitmap(String imagememstring)
+    {
+
+        byte[] bytes= Base64.decode(imagememstring,Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+    }
+
 }
