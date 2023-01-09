@@ -13,18 +13,35 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.EventListener;
 
 public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder> implements Filterable {
 
     Context context;
     ArrayList<PesqUser>  pesqUserArrayList;
     String imagemUserString;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    PesqUser pesqUser;
+    String nomeUtilizador;
+    String nome;
+    String id="";
+
 
     public PesqAdapter(Context context, ArrayList<PesqUser> pesqUserArrayList) {
         this.context = context;
@@ -42,15 +59,18 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
     @Override
     public void onBindViewHolder(@NonNull PesqAdapter.PesqViewHolder holder, int position) {
 
-        PesqUser pesqUser=pesqUserArrayList.get(position);
-        imagemUserString=pesqUser.foto_Bitmap_Utilizador;
-        holder.userName.setText(pesqUser.nome_Utilizador);
-        holder.name.setText(pesqUser.nome_Completo);
-        holder.fotoUser.setImageBitmap(converterStingToBitmap(imagemUserString));
-        holder.cardViewPesq.setOnClickListener(view -> {
+            pesqUser=pesqUserArrayList.get(position);
+            imagemUserString=pesqUser.foto_Bitmap_Utilizador;
+            holder.userName.setText(pesqUser.nome_Utilizador);
+            holder.name.setText(pesqUser.nome_Completo);
+            holder.fotoUser.setImageBitmap(converterStingToBitmap(imagemUserString));
+            holder.cardViewPesq.setOnClickListener(view -> {
+            nomeUtilizador=holder.userName.getText().toString().trim();
             Intent intent=new Intent(view.getContext(),Activity_Profile_Geral.class);
+            intent.putExtra("userName",nomeUtilizador);
             context.startActivity(intent);
         });
+
 
     }
 
@@ -133,5 +153,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
         byte[] bytes= Base64.decode(imagememstring,Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
+
+
 
 }
