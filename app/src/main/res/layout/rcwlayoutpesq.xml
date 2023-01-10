@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:id="@+id/cardviewPesq"
@@ -11,34 +12,37 @@
         android:id="@+id/imgFotoPerfilPesq"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="18dp"
-        android:src="@drawable/foto_sem_nada" />
-
+        android:layout_marginStart="16dp"
+        android:src="@drawable/foto_sem_nada"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtNomePesq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
         android:text="None"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="48dp"
-        android:textSize="20dp"
         android:textColor="#565656"
-        />
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeUtilizadorPesq" />
 
     <TextView
         android:id="@+id/txtNomeUtilizadorPesq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="28dp"
+        android:text="None"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        android:text="None"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

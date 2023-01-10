@@ -56,6 +56,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         binding=ActivityContinuarRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -108,7 +109,6 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
     }
     private void criarContaFireBase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
-        fotoemString="none";
         //pegar valor da data e da biografia
         biografia=binding.editbiografia.getText().toString().trim();
         dia=binding.dateaniversario.getDayOfMonth();
@@ -188,23 +188,7 @@ public class Continuar_Registro_Activity extends AppCompatActivity {
         }
     }
 
-    public Bitmap reduzirResolucaoImagem(Bitmap imagem)
-    {
-        try {
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            /*Reduzindo a qualidade da imagem para preservar memoria.
-             * Aqui você pode testar a redução que melhor atende sua necessidade
-             */
-            options.inSampleSize = 2;
 
-            return BitmapFactory.decodeStream(new FileInputStream(String.valueOf(imagem)), null, options);
-        } catch (FileNotFoundException e) {
-            Log.d("msg", e.getMessage());
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 
 
 

@@ -35,6 +35,7 @@ public class Register_User_Activity extends AppCompatActivity {
     private ActivityRegisterUserBinding binding;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean jaUtilizado=false;
+    String senhaEncriptada="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,46 +100,19 @@ public class Register_User_Activity extends AppCompatActivity {
     }
     private void criarComCriacaoContaFireBase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
-
+        try {
+            senhaEncriptada=Encriptar_Pass.encrypt(senha);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Intent intent=new Intent(getApplicationContext(),Continuar_Registro_Activity.class);
         intent.putExtra("email",email);
-        intent.putExtra("senha",senha);
+        intent.putExtra("senha",senhaEncriptada);
         intent.putExtra("nomeCompleto",nomeCompleto);
         intent.putExtra("nomeUtilizador",nomeUtilizador);
         startActivity(intent);
         finish();
-
-
-
-       /* Map<String, Object> user = new HashMap<>();
-        user.put("email", email);
-        user.put("senha", senha);
-        user.put("nome_completo", nomeCompleto);
-        user.put("nome_utilizador",nomeUtilizador);
-        user.put("admin",false);
-
-
-
-
-
-        db.collection("user")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(),"Conta Criada com sucesso",Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Erro",Toast.LENGTH_SHORT).show();
-                    }
-                })*/
-
-
-    ;}
+    }
 
     private void verificarContaFirebase(String email,String senha,String nomeCompleto,String nomeUtilizador)
     {
@@ -149,11 +123,18 @@ public class Register_User_Activity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                               if(document.getString("email").equals(email))
+                               if(document.getString("email").equals(email)||document.getString("nome_Utilizador").equals(nomeUtilizador))
                                {
-                                   Toast.makeText(getApplicationContext(),"Email ja usado! Escolha outro",Toast.LENGTH_SHORT).show();
-                                   jaUtilizado=true;
-                                   //break;
+                                   if(document.getString("email").equals(email))
+                                   {
+                                       Toast.makeText(getApplicationContext(),"Email ja usado! Escolha outro",Toast.LENGTH_SHORT).show();
+                                       jaUtilizado=true;
+                                   }
+                                   else if(document.getString("nome_Utilizador").equals(nomeUtilizador))
+                                   {
+                                       Toast.makeText(getApplicationContext(),"Nome de utilizador ja usado! Escolha outro",Toast.LENGTH_SHORT).show();
+                                       jaUtilizado=true;
+                                   }
                                }
                             }
                             if (jaUtilizado==false)

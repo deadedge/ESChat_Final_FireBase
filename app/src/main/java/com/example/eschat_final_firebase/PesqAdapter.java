@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,19 +34,22 @@ import java.util.EventListener;
 
 public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder> implements Filterable {
 
-    Context context;
-    ArrayList<PesqUser>  pesqUserArrayList;
-    String imagemUserString;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    PesqUser pesqUser;
-    String nomeUtilizador;
-    String nome;
-    String id="";
+    private Context context;
+    private ArrayList<PesqUser>  pesqUserArrayList;
+    private ArrayList<PesqUser> pesqUserArrayListFull;
+
+    private  String imagemUserString;
+    private  FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private  PesqUser pesqUser;
+    private String nomeUtilizador;
+
 
 
     public PesqAdapter(Context context, ArrayList<PesqUser> pesqUserArrayList) {
         this.context = context;
-        this.pesqUserArrayList = pesqUserArrayList;
+        this.pesqUserArrayListFull = pesqUserArrayList;
+        this.pesqUserArrayList = new ArrayList<>(pesqUserArrayListFull);
+
     }
 
     @NonNull
@@ -64,6 +68,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
             holder.userName.setText(pesqUser.nome_Utilizador);
             holder.name.setText(pesqUser.nome_Completo);
             holder.fotoUser.setImageBitmap(converterStingToBitmap(imagemUserString));
+            //
             holder.cardViewPesq.setOnClickListener(view -> {
             nomeUtilizador=holder.userName.getText().toString().trim();
             Intent intent=new Intent(view.getContext(),Activity_Profile_Geral.class);
@@ -93,7 +98,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
 
             if (constraint == null || constraint.length() == 0){
 
-                filteredNewsList.addAll(pesqUserArrayList);
+                filteredNewsList.addAll(pesqUserArrayListFull);
 
             }else {
 
@@ -133,7 +138,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
         TextView userName;
         TextView name;
         ImageView fotoUser;
-        LinearLayout cardViewPesq;
+        ConstraintLayout cardViewPesq;
 
         public PesqViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -59,7 +59,7 @@ public class Activity_Pesquisar extends AppCompatActivity {
         pesqUsersArrayList=new ArrayList<PesqUser>();
         pesqAdapter=new PesqAdapter(Activity_Pesquisar.this,pesqUsersArrayList);
 
-         recyclerView.setAdapter(pesqAdapter);
+        recyclerView.setAdapter(pesqAdapter);
 
         EventChangedListener();
 

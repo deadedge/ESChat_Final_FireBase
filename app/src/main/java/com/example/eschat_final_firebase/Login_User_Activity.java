@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -41,6 +42,7 @@ public class Login_User_Activity extends AppCompatActivity {
     Configuration config;
     String id;
     private int STRORAGE_PERMISSION_CODE=1;
+    String senhaEncriptada="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,10 @@ public class Login_User_Activity extends AppCompatActivity {
         String senha = binding.editpasslogin.getText().toString().trim();
         if (!email.isEmpty()) {
             if (!senha.isEmpty()) {
+                try {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 VerificarLoginFireBase(email, senha);
             } else {
                 Toast.makeText(this, "Preencha a senha ", Toast.LENGTH_SHORT).show();
@@ -90,6 +96,11 @@ public class Login_User_Activity extends AppCompatActivity {
     }
 
     private void VerificarLoginFireBase(String email, String senha) {
+        try {
+            senhaEncriptada=Encriptar_Pass.encrypt(senha);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         db.collection("user")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -97,7 +108,7 @@ public class Login_User_Activity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getString("email").equals(email) && document.getString("senha").equals(senha)) {
+                                if (document.getString("email").equals(email) && document.getString("senha").equals(senhaEncriptada)) {
                                     Toast.makeText(getApplicationContext(), "Login efetuado com sucesso", Toast.LENGTH_SHORT).show();
 
                                     id=document.getId();
@@ -179,4 +190,5 @@ public class Login_User_Activity extends AppCompatActivity {
             }
         }
     }
+
 }
