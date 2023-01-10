@@ -50,6 +50,7 @@ public class PesqAdapter extends RecyclerView.Adapter<PesqAdapter.PesqViewHolder
         this.pesqUserArrayListFull = pesqUserArrayList;
         this.pesqUserArrayList = new ArrayList<>(pesqUserArrayListFull);
 
+
     }
 
     @NonNull
